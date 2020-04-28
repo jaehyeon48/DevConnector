@@ -21,7 +21,7 @@ async function RegisterController(req, res, next) {
     const isUserExist = await User.findOne({ email });
 
     if (!!isUserExist) {
-      res.status(400).json({ errors: [{ msg: 'User already exists' }] });
+      res.status(400).json({ errorMsg: 'user already exists.' });
     }
 
     const avatar = gravatar.url(email, {

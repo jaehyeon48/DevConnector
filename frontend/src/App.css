@@ -19,6 +19,7 @@ body {
   line-height: 1.6;
   background-color: #fff;
   color: #333;
+  overflow: hidden;
 }
 
 a {
@@ -226,7 +227,7 @@ img {
 
 /* Overlay */
 .dark-overlay {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.77);
   position: absolute;
   top: 0;
   left: 0;
@@ -333,8 +334,40 @@ button {
 /* Landing Page */
 .landing {
   position: relative;
-  background: url('./img/showcase.jpg') no-repeat center center/cover;
+  width: 100%;
   height: 100vh;
+  animation: bgfade 18s linear infinite 0s;
+  animation-timing-function: ease-in-out;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100vw 100vh;
+  background-image: url('./img/showcase1.jpg');
+}
+
+@keyframes bgfade {
+  0% {
+    background-image: url('./img/showcase1.jpg');
+  }
+
+  25% {
+    background-image: url('./img/showcase4.jpg');
+    animation-delay: 4s;
+  }
+
+  50% {
+    background-image: url('./img/showcase2.jpg');
+    animation-delay: 8s;
+  }
+
+  75% {
+    background-image: url('./img/showcase5.jpg');
+    animation-delay: 12s;
+  }
+
+  100% {
+    background-image: url('./img/showcase3.jpg');
+    animation-delay: 16s;
+  }
 }
 
 .landing-inner {
@@ -347,6 +380,17 @@ button {
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+
+.main-logo {
+  position: relative;
+  top: 6px;
+}
+
+@media (max-width: 700px) {
+  .main-logo {
+    width: 210px;
+  }
 }
 
 /* Profiles Page */
