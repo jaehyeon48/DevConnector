@@ -45,9 +45,9 @@ async function RegisterController(req, res, next) {
       user: { id: newUser.id }
     };
 
-    jwt.sign(payload, config.get('jwtSecret'), { expiresIn: '20h' }, (err, token) => {
+    jwt.sign(payload, config.get('jwtSecret'), { expiresIn: '1h' }, (err, token) => {
       if (err) throw err;
-      res.json({ token });
+      res.cookie('token', token, { httpOnly: true }).sendStatus(200);
     });
   } catch (err) {
     console.error(err.message);

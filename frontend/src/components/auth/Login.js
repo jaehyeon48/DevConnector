@@ -16,7 +16,6 @@ const Login = (props) => {
 
   const handleSubmit = async event => {
     event.preventDefault();
-
     props.login(email, password);
   };
 

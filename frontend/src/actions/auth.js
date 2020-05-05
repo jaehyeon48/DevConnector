@@ -10,22 +10,16 @@ import {
   LOGIN_FAIL,
   LOGOUT
 } from '../actions/types';
-import setAuthToken from '../utils/setAuthToken';
 
 export const loadUser = () => async dispatch => {
   try {
-    if (localStorage.token) {
-      setAuthToken(localStorage.token);
-    } else {
-      throw new Error(); // token does not exist
-    }
-
     const response = await axios.get('/api/auth');
-
-    dispatch({
-      type: USER_LOADED,
-      payload: response.data
-    });
+    if (response.status === 200) {
+      dispatch({
+        type: USER_LOADED,
+        payload: response.data
+      });
+    }
   } catch (err) {
     dispatch({
       type: AUTH_ERROR
@@ -49,7 +43,6 @@ export const register = ({ name, email, password }) => async dispatch => {
       type: REGISTER_SUCCESS,
       payload: response.data
     });
-
     dispatch(loadUser());
   } catch (err) {
     const errors = err.response.data.errors;
@@ -89,6 +82,11 @@ export const login = (email, password) => async dispatch => {
   }
 };
 
-export const logout = () => dispatch => {
-  dispatch({ type: LOGOUT });
+export const logout = () => async dispatch => {
+  try {
+    await axios.get('/api/auth/logout');
+    dispatch({ type: LOGOUT });
+  } catch (err) {
+    console.log(err);
+  }
 };

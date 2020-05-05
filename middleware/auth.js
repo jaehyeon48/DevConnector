@@ -1,9 +1,8 @@
 const jwt = require('jsonwebtoken');
 const config = require('config');
-const { validationResult } = require('express-validator');
 
 function auth(req, res, next) {
-  const token = req.header('Authorization').split(' ')[1]; // extract token from 'Bearer <token>'
+  const token = req.cookies.token;
 
   if (!token) {
     return res.status(401).json({ msg: 'No token, authorization denied' });
@@ -18,7 +17,5 @@ function auth(req, res, next) {
     res.status(401).json({ msg: 'Token is invalid.' });
   }
 }
-
-
 
 module.exports = auth;

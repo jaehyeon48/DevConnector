@@ -23,25 +23,6 @@ const Register = (props) => {
     if (password !== confirmPwd) {
       props.setAlert('Passwords do not match!', 'danger');
     } else {
-      // const newUser = {
-      //   name,
-      //   email,
-      //   password
-      // };
-
-      // try {
-      //   const config = {
-      //     headers: { 'Content-Type': 'application/json' }
-      //   };
-
-      //   const body = JSON.stringify(newUser);
-
-      //   const response = await axios.post('/api/users', body, config);
-
-      //   console.log(response.data);
-      // } catch (err) {
-      //   console.log(err.response.data.errorMsg);
-      // }
       props.register({ name, email, password });
     }
   };

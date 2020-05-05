@@ -9,12 +9,8 @@ import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Alert from './components/layout/Alert';
 import './App.css';
-import setAuthToken from './utils/setAuthToken';
 import { loadUser } from './actions/auth';
 
-if (localStorage.token) {
-  setAuthToken(localStorage.token);
-}
 
 const App = () => {
   useEffect(() => {

@@ -1,4 +1,5 @@
 const express = require('express');
+const cookieParser = require('cookie-parser');
 
 const connectDB = require('./config/db');
 
@@ -6,6 +7,7 @@ connectDB(); // Connect Database
 const app = express();
 
 app.use(express.json({ extended: false }));
+app.use(cookieParser());
 
 app.get('/', (req, res, next) => res.send('API Running'));
 
