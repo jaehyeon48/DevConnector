@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types'
 
-
 import { setAlert } from '../../actions/alert';
+import { register } from '../../actions/auth';
 
 const Register = (props) => {
   const [formData, setFormData] = useState({
@@ -42,9 +42,13 @@ const Register = (props) => {
       // } catch (err) {
       //   console.log(err.response.data.errorMsg);
       // }
-      console.log('SUCCESS!');
+      props.register({ name, email, password });
     }
   };
+
+  if (props.isAuthenticated) {
+    return <Redirect to="/dashboard" />
+  }
 
   return (
     <React.Fragment>
@@ -58,7 +62,7 @@ const Register = (props) => {
             name="name"
             value={name}
             onChange={e => handleChange(e)}
-            required
+          // required
           />
         </div>
         <div className="form-group">
@@ -78,7 +82,7 @@ const Register = (props) => {
             type="password"
             placeholder="Password"
             name="password"
-            minLength="6"
+            // minLength="6"
             value={password}
             onChange={e => handleChange(e)}
           />
@@ -88,7 +92,7 @@ const Register = (props) => {
             type="password"
             placeholder="Confirm Password"
             name="confirmPwd"
-            minLength="6"
+            // minLength="6"
             value={confirmPwd}
             onChange={e => handleChange(e)}
           />
@@ -103,7 +107,13 @@ const Register = (props) => {
 };
 
 Register.propTypes = {
-  setAlert: PropTypes.func.isRequired
+  setAlert: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool
 };
 
-export default connect(null, { setAlert })(Register);
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, { setAlert, register })(Register);
