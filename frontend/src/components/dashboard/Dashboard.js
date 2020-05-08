@@ -27,7 +27,7 @@ const Dashboard = ({
         <h1 className="large text-primary">Dashboard</h1>
         <p className="lead">
           <i className="fas fa-user"></i>
-          Welcome {user && user.name}!
+          Welcome {user && <span>{user.firstName} {user.lastName}</span>}!
         </p>
         {profile !== null ?
           <React.Fragment>

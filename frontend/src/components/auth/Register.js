@@ -8,13 +8,14 @@ import { register } from '../../actions/auth';
 
 const Register = (props) => {
   const [formData, setFormData] = useState({
-    name: '',
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
     confirmPwd: ''
   });
 
-  const { name, email, password, confirmPwd } = formData;
+  const { firstName, lastName, email, password, confirmPwd } = formData;
 
   const handleChange = event => setFormData({ ...formData, [event.target.name]: event.target.value });
 
@@ -23,7 +24,7 @@ const Register = (props) => {
     if (password !== confirmPwd) {
       props.setAlert('Passwords do not match!', 'danger');
     } else {
-      props.register({ name, email, password });
+      props.register({ firstName, lastName, email, password });
     }
   };
 
@@ -39,11 +40,17 @@ const Register = (props) => {
         <div className="form-group">
           <input
             type="text"
-            placeholder="Name"
-            name="name"
-            value={name}
+            placeholder="First Name"
+            name="firstName"
+            value={firstName}
             onChange={e => handleChange(e)}
-          // required
+          />
+          <input
+            type="text"
+            placeholder="Last Name"
+            name="lastName"
+            value={lastName}
+            onChange={e => handleChange(e)}
           />
         </div>
         <div className="form-group">

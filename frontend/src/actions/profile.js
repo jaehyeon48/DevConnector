@@ -124,7 +124,7 @@ export const editProfile = (formData, history, profileId) => async dispatch => {
     });
 
     dispatch(setAlert('Profile Updated', 'success'));
-    history.push('/dashboard');
+    history.goBack();
   } catch (err) {
     const errors = err.response.data;
     if (errors) {

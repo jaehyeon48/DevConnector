@@ -159,7 +159,7 @@ const EditProfile = ({
         </div>
         <div className="form-group">
           <textarea
-            placeholder="A short bio of yourself"
+            placeholder="* A short bio of yourself"
             name="bio"
             value={bio}
             onChange={e => handleChange(e)}

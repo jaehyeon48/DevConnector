@@ -45,7 +45,7 @@ async function GetAllProfileController(req, res, next) {
 async function GetUserProfileController(req, res, next) {
   try {
     const userId = req.params.userId;
-    const profile = await Profile.findOne({ user: userId }).populate('user', ['name', 'avatar']);
+    const profile = await Profile.findOne({ user: userId }).populate('user', ['firstName', 'lastName', 'avatar']);
 
     if (!profile) {
       return res.status(400).json({ errorMsg: 'Profile Not Found!' });

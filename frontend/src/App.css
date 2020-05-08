@@ -1,27 +1,4 @@
 /* Global Styles */
-.testtesttest {
-  display: grid;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
-  font-size: 1.1rem;
-}
-
-.testtesttest h2 {
-  font-size: 2rem;
-}
-
-.testtesttest p {
-  display: flex;
-  justify-content: left;
-  align-items: center;
-}
-
-.testtesttest a {
-  width: 135px;
-  height: 45px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 :root {
   --primary-color: #17a2b8;
   --dark-color: #343a40;
@@ -435,6 +412,30 @@ button {
     'exp edu'
     'github github';
   grid-gap: 1rem;
+}
+
+.profile-container {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  font-size: 1.1rem;
+}
+
+.profile-container h2 {
+  font-size: 2rem;
+}
+
+.profile-container p {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.profile-container a {
+  width: 135px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .profile-top {

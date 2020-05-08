@@ -5,12 +5,12 @@ const ProfileAbout = ({
   profile: {
     bio,
     skills,
-    user: { name }
+    user: { firstName, lastName }
   }
 }) =>
   <div className="profile-about bg-light p-2">
 
-    <h2 className="text-primary">{name}'s Bio</h2>
+    <h2 className="text-primary">{firstName}'s Bio</h2>
     <p>{bio}</p>
     <div className="line"></div>
     <h2 className="text-primary">Skill Set</h2>

@@ -9,7 +9,8 @@ const ProfileTop = ({
     website,
     social,
     user: {
-      name,
+      firstName,
+      lastName,
       avatar
     }
   }
@@ -20,7 +21,7 @@ const ProfileTop = ({
       src={avatar}
       alt=""
     />
-    <h1 className="large">{name}</h1>
+    <h1 className="large">{firstName} {lastName}</h1>
     <p className="lead">{status} {company && <span> @ {company}</span>}</p>
     <p>{location && <span>{location}</span>}</p>
     <div className="icons my-1">

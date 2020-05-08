@@ -15,7 +15,7 @@ async function RegisterController(req, res, next) {
     return res.status(400).json({ errors: errors.array() })
   }
 
-  const { name, email, password } = req.body;
+  const { firstName, lastName, email, password } = req.body;
 
   try {
     const isUserExist = await User.findOne({ email });
@@ -31,7 +31,8 @@ async function RegisterController(req, res, next) {
     });
 
     const newUser = new User({
-      name,
+      firstName,
+      lastName,
       email,
       avatar,
       password

@@ -9,7 +9,8 @@ const { RegisterController } = require('../controllers/usersControllers');
 // @DESCRIPTION   Register user
 // @ACCESS        Public
 router.post('/', [
-  check('name', 'Name is required').not().isEmpty(),
+  check('firstName', 'First name is required').not().isEmpty(),
+  check('lastName', 'Last name is required').not().isEmpty(),
   check('email', 'Please include a valid email').isEmail(),
   check('password', 'Please enter a password with at least 5 characters').isLength({ min: 5 })
 ], RegisterController);
