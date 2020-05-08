@@ -1,5 +1,6 @@
 const express = require('express');
 const { check } = require('express-validator');
+const validator = require('validator');
 
 const auth = require('../middleware/auth');
 const {
@@ -44,7 +45,8 @@ router.get('/github/:username', GetGithubRepo);
 // @ACCESS        Private
 router.post('/', [auth, [
   check('status', 'Status is required').not().isEmpty(),
-  check('skills', 'Skills is required').not().isEmpty()
+  check('skills', 'Skills is required').not().isEmpty(),
+  check('bio', 'Bio is required').not().isEmpty()
 ]], CreateProfileController);
 
 // @ROUTE         PUT api/profile/experience
@@ -70,10 +72,7 @@ router.put('/education', [auth, [
 // @ROUTE         PATCH api/profile/:profileId
 // @DESCRIPTION   Update user's profile
 // @ACCESS        Private
-router.patch('/:profileId', [auth, [
-  check('status', 'Status is required').not().isEmpty(),
-  check('skills', 'Skills is required').not().isEmpty()
-]], UpdateProfileController);
+router.patch('/:profileId', auth, UpdateProfileController);
 
 // @ROUTE         DELETE api/profile
 // @DESCRIPTION   Delete user and user's profile
@@ -88,6 +87,6 @@ router.delete('/experience/:experienceId', auth, DeleteExperienceController);
 // @ROUTE         DELETE api/profile/experience/:educationId
 // @DESCRIPTION   Delete an education from profile
 // @ACCESS        Private
-router.delete('/experience/:experienceId', auth, DeleteEducationController);
+router.delete('/education/:educationId', auth, DeleteEducationController);
 
 module.exports = router;

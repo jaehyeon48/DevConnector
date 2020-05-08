@@ -5,7 +5,7 @@ const { validationResult } = require('express-validator');
 
 const User = require('../models/UserModel');
 const Profile = require('../models/ProfileModel');
-
+const Post = require('../models/PostModel');
 
 // @ROUTE         GET api/profile/me
 // @DESCRIPTION   Get current users profile
@@ -224,16 +224,35 @@ async function AddEducationController(req, res, next) {
 // @ACCESS        Private
 async function UpdateProfileController(req, res, next) {
   const updatePlaceId = req.params.profileId;
-
   try {
     let profile = await Profile.findById(updatePlaceId);
 
     if (!profile) {
-      return res.status(404).json({ error: [{ msg: 'Cannot find the profile.' }] });
+      return res.status(404).json({ msg: 'Cannot find the profile.' });
     }
 
     if (profile.user.toString() !== req.user.id) {
-      return res.status(403).json({ error: [{ msg: 'You are not allowed to update this profile.' }] });
+      return res.status(403).json({ msg: 'You are not allowed to update this profile.' });
+    }
+
+    // check if the required data is sent
+
+    const errors = [];
+
+    if (!req.body.status || !req.body.status.trim()) {
+      errors.push('Status is required.');
+    }
+
+    if (!req.body.skills || !req.body.skills.trim()) {
+      errors.push('Skills is required.');
+    }
+
+    if (!req.body.bio || !req.body.bio.trim()) {
+      errors.push('Bio is required.');
+    }
+
+    if (errors.length > 0) {
+      return res.status(400).json(errors);
     }
 
     const profileData = {
@@ -251,14 +270,12 @@ async function UpdateProfileController(req, res, next) {
       linkedin
     } = req.body;
 
+
+
     const personalFields = ['company', 'website', 'location', 'bio', 'status', 'githubusername'];
     const socialFields = ['youtube', 'twitter', 'facebook', 'linkedin', 'instagram'];
 
-    personalFields.forEach(field => {
-      if (profileData[field]) {
-        profile[field] = profileData[field];
-      }
-    });
+    personalFields.forEach(field => profile[field] = profileData[field]);
 
     if (skills) {
       profile.skills = skills.split(',').map(skill => skill.trim());
@@ -283,15 +300,12 @@ async function UpdateProfileController(req, res, next) {
 // @DESCRIPTION   Delete user and user's profile
 // @ACCESS        Private
 async function DeleteProfileAndUserController(req, res, next) {
-  // const profile = await Profile.findOne({ user: req.user.id });
-
-  // if (profile.user.toString() !== req.user.id) {
-  //   return res.status(403).json({ errorMsg: `You're not allowed to delete this profile.` });
-  // }
   try {
+    await Post.deleteMany({ user: req.user.id });
     await Profile.findOneAndRemove({ user: req.user.id });
     await User.findByIdAndRemove({ _id: req.user.id });
 
+    res.cookie('token', '', { maxAge: '-1' });
     res.json({ message: 'User has deleted!' });
   } catch (err) {
     console.error(err.message);

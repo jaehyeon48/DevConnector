@@ -8,7 +8,8 @@ import {
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-  LOGOUT
+  LOGOUT,
+  CLEAR_PROFILE
 } from '../actions/types';
 
 export const loadUser = () => async dispatch => {
@@ -85,6 +86,7 @@ export const login = (email, password) => async dispatch => {
 export const logout = () => async dispatch => {
   try {
     await axios.get('/api/auth/logout');
+    dispatch({ type: CLEAR_PROFILE });
     dispatch({ type: LOGOUT });
   } catch (err) {
     console.log(err);

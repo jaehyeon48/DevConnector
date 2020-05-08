@@ -9,8 +9,14 @@ const User = require('../models/UserModel');
 // @ROUTE         GET api/auth
 // @DESCRIPTION   check authentication
 // @ACCESS        Private   
-function CheckAuthController(req, res, next) {
-  res.status(200).send();
+async function CheckAuthController(req, res, next) {
+  try {
+    const user = await User.findById(req.user.id, '-password');
+    res.status(200).json(user);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
 }
 
 // @ROUTE         GET api/auth/logout
