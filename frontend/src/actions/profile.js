@@ -168,7 +168,36 @@ export const addExperience = (formData, history) => async dispatch => {
       payload: { msg: err.response.statusText, status: err.response.status }
     });
   }
-}
+};
+
+export const editExperience = (formData, history, experienceId) => async dispatch => {
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    const response = await axios.patch(`/api/profile/experience/${experienceId}`, formData, config);
+    dispatch({
+      type: GET_PROFILE,
+      payload: response.data
+    });
+
+    dispatch(setAlert('Experience Updated', 'success'));
+    history.goBack();
+  } catch (err) {
+    const errors = err.response.data;
+    if (errors) {
+      errors.forEach(error => dispatch(setAlert(error, 'danger')));
+    }
+
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
 
 export const addEducation = (formData, history) => async dispatch => {
   try {
@@ -201,6 +230,35 @@ export const addEducation = (formData, history) => async dispatch => {
     });
   }
 }
+
+export const editEducation = (formData, history, educationId) => async dispatch => {
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    const response = await axios.patch(`/api/profile/education/${educationId}`, formData, config);
+    dispatch({
+      type: GET_PROFILE,
+      payload: response.data
+    });
+
+    dispatch(setAlert('Education Updated', 'success'));
+    history.goBack();
+  } catch (err) {
+    const errors = err.response.data;
+    if (errors) {
+      errors.forEach(error => dispatch(setAlert(error, 'danger')));
+    }
+
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
 
 export const deleteExperience = id => async dispatch => {
   try {

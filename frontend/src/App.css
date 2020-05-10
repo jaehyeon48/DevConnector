@@ -3,8 +3,28 @@
   --primary-color: #17a2b8;
   --dark-color: #343a40;
   --light-color: #f4f4f4;
+  --warning-color: #ffc415;
   --danger-color: #dc3545;
   --success-color: #28a745;
+}
+
+.testtest {
+  display: grid;
+  grid-template-columns: repeat(30, 1fr);
+}
+
+.test2 {
+  grid-row: 1;
+  grid-column: 1 / span 5;
+}
+
+.test3 {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  grid-row: 1;
+  grid-column: 6 / span 6;
+  margin-top: 0.3rem;
 }
 
 * {
@@ -180,6 +200,14 @@ img {
   color: #fff;
 }
 
+.btn-warning,
+.bg-warning,
+.badge-warning,
+.alert-warning {
+  background: var(--warning-color);
+  color: #fff;
+}
+
 .btn-danger,
 .bg-danger,
 .badge-danger,
@@ -237,6 +265,21 @@ img {
 /* Forms */
 .form .form-group {
   margin: 1.2rem 0;
+}
+
+.form-name {
+  display: grid;
+  grid-template-columns: repeat(1fr, 30);
+}
+
+.form-first-name {
+  grid-row: 1;
+  grid-column: 1 / span 12;
+}
+
+.form-last-name {
+  grid-row: 1;
+  grid-column: 18 / span 12;
 }
 
 .form .form-text {

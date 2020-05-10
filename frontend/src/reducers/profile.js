@@ -4,7 +4,7 @@ import {
   PROFILE_ERROR,
   CLEAR_PROFILE,
   UPDATE_PROFILE,
-  GET_REPOS,
+  GET_REPOS
 } from "../actions/types";
 
 const initialState = {
@@ -33,6 +33,7 @@ export default (state = initialState, action) => {
     case PROFILE_ERROR:
       return {
         ...state,
+        profile: null,
         error: action.payload,
         loading: false
       };

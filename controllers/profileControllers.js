@@ -296,6 +296,143 @@ async function UpdateProfileController(req, res, next) {
   }
 }
 
+// @ROUTE         PATCH api/profile/experience/:experienceId
+// @DESCRIPTION   Update experience
+// @ACCESS        Private
+async function UpdateExperienceController(req, res, next) {
+  const experienceId = req.params.experienceId;
+  const userId = req.user.id;
+
+  try {
+    const profile = await Profile.findOne({ user: userId });
+
+    if (!profile) {
+      return res.status(404).json({ msg: 'Cannot find the profile.' });
+    }
+
+    const experience = profile.experience.find(exp => exp.id === experienceId);
+
+    if (!experience) {
+      return res.status(404).json({ msg: 'The experience does not exist.' });
+    }
+
+    const errors = [];
+
+    if (!req.body.title || !req.body.title.trim()) {
+      errors.push('Job title is required.');
+    }
+
+    if (!req.body.company || !req.body.company.trim()) {
+      errors.push('Company is required.');
+    }
+
+    if (!req.body.from) {
+      errors.push('From date is required.');
+    }
+
+    if (req.body.current === false && !req.body.to) {
+      errors.push('To date is required.');
+    }
+
+    if (errors.length > 0) {
+      return res.status(400).json(errors);
+    }
+
+    const experienceData = {
+      title,
+      company,
+      location,
+      from,
+      to,
+      current,
+      description
+    } = req.body;
+
+
+    const expFields = ['title', 'company', 'location', 'from', 'to', 'current', 'description'];
+
+    expFields.forEach(field => {
+      experience[field] = experienceData[field];
+    });
+    await profile.save();
+
+    res.json(profile);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send('Server Error');
+  }
+}
+
+// @ROUTE         PATCH api/profile/education/:educationId
+// @DESCRIPTION   Update education
+// @ACCESS        Private
+async function UpdateEducationController(req, res, next) {
+  const educationId = req.params.educationId;
+  const userId = req.user.id;
+
+  try {
+    const profile = await Profile.findOne({ user: userId });
+
+    if (!profile) {
+      return res.status(404).json({ msg: 'Cannot find the profile.' });
+    }
+
+    const education = profile.education.find(edu => edu.id === educationId);
+
+    if (!education) {
+      return res.status(404).json({ msg: 'The education does not exist.' });
+    }
+
+    const errors = [];
+
+    if (!req.body.school || !req.body.school.trim()) {
+      errors.push('School (or boot camp) is required.');
+    }
+
+    if (!req.body.degree || !req.body.degree.trim()) {
+      errors.push('Degree (or certificate) is required.');
+    }
+
+    if (!req.body.fieldofstudy || !req.body.fieldofstudy.trim()) {
+      errors.push('Field of study is required.');
+    }
+
+    if (!req.body.from) {
+      errors.push('From date is required.');
+    }
+
+    if (req.body.current === false && !req.body.to) {
+      errors.push('To date is required.');
+    }
+
+    if (errors.length > 0) {
+      return res.status(400).json(errors);
+    }
+
+    const educationData = {
+      school,
+      degree,
+      fieldofstudy,
+      from,
+      to,
+      current,
+      description
+    } = req.body;
+
+    const eduFields = ['school', 'degree', 'fieldofstudy', 'from', 'to', 'current', 'description'];
+
+    eduFields.forEach(field => {
+      education[field] = educationData[field];
+    });
+    await profile.save();
+
+    res.json(profile);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send('Server Error');
+  }
+}
+
 // @ROUTE         DELETE api/profile
 // @DESCRIPTION   Delete user and user's profile
 // @ACCESS        Private
@@ -370,6 +507,8 @@ module.exports = {
   AddExperienceController,
   AddEducationController,
   UpdateProfileController,
+  UpdateExperienceController,
+  UpdateEducationController,
   DeleteProfileAndUserController,
   DeleteExperienceController,
   DeleteEducationController

@@ -38,20 +38,24 @@ const Register = (props) => {
       <p className="lead"><i className="fas fa-user"></i> Create Your Account</p>
       <form className="form" onSubmit={e => handleSubmit(e)}>
         <div className="form-group">
-          <input
-            type="text"
-            placeholder="First Name"
-            name="firstName"
-            value={firstName}
-            onChange={e => handleChange(e)}
-          />
-          <input
-            type="text"
-            placeholder="Last Name"
-            name="lastName"
-            value={lastName}
-            onChange={e => handleChange(e)}
-          />
+          <div className="form-name">
+            <input
+              type="text"
+              className="form-first-name"
+              placeholder="First Name"
+              name="firstName"
+              value={firstName}
+              onChange={e => handleChange(e)}
+            />
+            <input
+              type="text"
+              className="form-last-name"
+              placeholder="Last Name"
+              name="lastName"
+              value={lastName}
+              onChange={e => handleChange(e)}
+            />
+          </div>
         </div>
         <div className="form-group">
           <input type="email"

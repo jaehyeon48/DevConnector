@@ -12,6 +12,8 @@ const {
   AddExperienceController,
   AddEducationController,
   UpdateProfileController,
+  UpdateExperienceController,
+  UpdateEducationController,
   DeleteProfileAndUserController,
   DeleteExperienceController,
   DeleteEducationController
@@ -73,6 +75,16 @@ router.put('/education', [auth, [
 // @DESCRIPTION   Update user's profile
 // @ACCESS        Private
 router.patch('/:profileId', auth, UpdateProfileController);
+
+// @ROUTE         PATCH api/profile/experience/:experienceId
+// @DESCRIPTION   Update experience
+// @ACCESS        Private
+router.patch('/experience/:experienceId', auth, UpdateExperienceController);
+
+// @ROUTE         PATCH api/profile/education/:educationId
+// @DESCRIPTION   Update education
+// @ACCESS        Private
+router.patch('/education/:educationId', auth, UpdateEducationController);
 
 // @ROUTE         DELETE api/profile
 // @DESCRIPTION   Delete user and user's profile

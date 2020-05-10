@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 
@@ -17,6 +18,9 @@ const Experience = props => {
         )}
       </td>
       <td>
+        <Link to={`/edit-experience/${experience._id}`} className="btn btn-warning">Edit</Link>
+      </td>
+      <td>
         <button className="btn btn-danger" onClick={() => props.deleteExperience(experience._id)}>Delete</button>
       </td>
     </tr>
@@ -31,6 +35,7 @@ const Experience = props => {
             <th>Company</th>
             <th className="hide-sm">Title</th>
             <th className="hide-sm">Years</th>
+            <th />
             <th />
           </tr>
         </thead>
