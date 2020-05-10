@@ -1,0 +1,5 @@
+{
+  "mongoURI": "mongodb+srv://jason:fhfxm0248@cluster0-mudf1.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtSecret": "jasonruperthudson",
+  "githubToken": "a00bf91201b7fd5ec1e895b711970fb5a711781a"
+}
