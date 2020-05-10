@@ -27,6 +27,9 @@ const EditEducation = ({
 
   useEffect(() => {
     getCurrentProfile();
+  }, []);
+
+  useEffect(() => {
     setFormData({
       school: loading || !education.school ? '' : education.school,
       degree: loading || !education.degree ? '' : education.degree,

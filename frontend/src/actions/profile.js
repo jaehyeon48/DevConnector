@@ -179,6 +179,7 @@ export const editExperience = (formData, history, experienceId) => async dispatc
     };
 
     const response = await axios.patch(`/api/profile/experience/${experienceId}`, formData, config);
+
     dispatch({
       type: GET_PROFILE,
       payload: response.data
@@ -191,11 +192,6 @@ export const editExperience = (formData, history, experienceId) => async dispatc
     if (errors) {
       errors.forEach(error => dispatch(setAlert(error, 'danger')));
     }
-
-    dispatch({
-      type: PROFILE_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
-    });
   }
 };
 
@@ -208,7 +204,6 @@ export const addEducation = (formData, history) => async dispatch => {
     };
 
     const response = await axios.put('/api/profile/education', formData, config);
-
     dispatch({
       type: UPDATE_PROFILE,
       payload: response.data
@@ -252,11 +247,6 @@ export const editEducation = (formData, history, educationId) => async dispatch 
     if (errors) {
       errors.forEach(error => dispatch(setAlert(error, 'danger')));
     }
-
-    dispatch({
-      type: PROFILE_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
-    });
   }
 };
 

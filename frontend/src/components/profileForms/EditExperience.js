@@ -28,6 +28,9 @@ const EditExperience = ({
 
   useEffect(() => {
     getCurrentProfile();
+  }, []);
+
+  useEffect(() => {
     setFormData({
       title: loading || !experience.title ? '' : experience.title,
       company: loading || !experience.company ? '' : experience.company,
@@ -37,7 +40,7 @@ const EditExperience = ({
       current: loading || !experience.current ? false : experience.current,
       description: loading || !experience.description ? '' : experience.description,
     });
-  }, [loading]);
+  }, [loading, experience]);
 
   const { title, company, location, from, to, current, description } = formData;
 

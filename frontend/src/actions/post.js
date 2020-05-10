@@ -47,7 +47,6 @@ export const getPost = postId => async dispatch => {
 export const addLike = postId => async dispatch => {
   try {
     const response = await axios.put(`/api/posts/like/${postId}`);
-    console.log(response.data)
     dispatch({
       type: UPDATE_LIKES,
       payload: { postId, likes: response.data }
@@ -63,7 +62,6 @@ export const addLike = postId => async dispatch => {
 export const removeLike = postId => async dispatch => {
   try {
     const response = await axios.put(`/api/posts/unlike/${postId}`);
-    console.log(response.data)
 
     dispatch({
       type: UPDATE_LIKES,

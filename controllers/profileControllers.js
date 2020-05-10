@@ -316,6 +316,7 @@ async function UpdateExperienceController(req, res, next) {
       return res.status(404).json({ msg: 'The experience does not exist.' });
     }
 
+
     const errors = [];
 
     if (!req.body.title || !req.body.title.trim()) {
@@ -333,6 +334,7 @@ async function UpdateExperienceController(req, res, next) {
     if (req.body.current === false && !req.body.to) {
       errors.push('To date is required.');
     }
+
 
     if (errors.length > 0) {
       return res.status(400).json(errors);
