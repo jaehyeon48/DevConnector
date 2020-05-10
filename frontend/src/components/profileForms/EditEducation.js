@@ -36,7 +36,7 @@ const EditEducation = ({
       current: loading || !education.current ? false : education.current,
       description: loading || !education.description ? '' : education.description,
     });
-  }, [loading, getCurrentProfile]);
+  }, [loading, education]);
 
   const { school, degree, fieldofstudy, from, to, current, description } = formData;
 

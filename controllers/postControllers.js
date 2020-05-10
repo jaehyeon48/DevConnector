@@ -53,7 +53,8 @@ async function CreatePostController(req, res, next) {
 
     const newPost = new Post({
       text: req.body.text,
-      name: user.name,
+      firstName: user.firstName,
+      lastName: user.lastName,
       avatar: user.avatar,
       user: req.user.id
     });
@@ -82,7 +83,8 @@ async function AddCommentController(req, res, next) {
 
     const newComment = {
       text: req.body.text,
-      name: user.name,
+      firstName: user.firstName,
+      lastName: user.lastName,
       avatar: user.avatar,
       user: req.user.id
     };
@@ -127,7 +129,6 @@ async function LikePostController(req, res, next) {
 async function UnlikePostController(req, res, next) {
   try {
     const post = await Post.findById(req.params.postId);
-
     // Check if the post has already been liked by the user
     if (post.likes.filter(like => like.user.toString() === req.user.id).length === 0) {
       return res.status(400).json({ msg: 'Post has not yet been liked' });
@@ -139,7 +140,6 @@ async function UnlikePostController(req, res, next) {
     post.likes.splice(removeIndex, 1);
 
     await post.save();
-
     res.json(post.likes);
   } catch (err) {
     console.log(err.message);

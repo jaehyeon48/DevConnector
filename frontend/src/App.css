@@ -8,17 +8,17 @@
   --success-color: #28a745;
 }
 
-.testtest {
+.profile-github-info {
   display: grid;
   grid-template-columns: repeat(30, 1fr);
 }
 
-.test2 {
+.profile-github-info h2 {
   grid-row: 1;
   grid-column: 1 / span 5;
 }
 
-.test3 {
+.profile-github-info h4 {
   display: flex;
   justify-content: left;
   align-items: center;

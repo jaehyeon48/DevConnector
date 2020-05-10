@@ -18,6 +18,8 @@ import AddEducation from './components/profileForms/AddEducation';
 import EditEducation from './components/profileForms/EditEducation';
 import Profiles from './components/profiles/Profiles';
 import Profile from './components/profile/Profile';
+import Posts from './components/posts/Posts';
+import Post from './components/post/Post';
 import './App.css';
 import { loadUser } from './actions/auth';
 
@@ -46,6 +48,8 @@ const App = () => {
             <PrivateRoute path="/edit-experience/:expId" component={EditExperience} exact />
             <PrivateRoute path="/add-education" component={AddEducation} exact />
             <PrivateRoute path="/edit-education/:eduId" component={EditEducation} exact />
+            <PrivateRoute path="/posts" component={Posts} exact />
+            <PrivateRoute path="/posts/:postId" component={Post} exact />
             <Route path="/login" component={Login} exact />
 
           </Switch>

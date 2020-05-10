@@ -9,6 +9,7 @@ import { editExperience } from '../../actions/profile';
 const EditExperience = ({
   loading,
   experience,
+  getCurrentProfile,
   editExperience,
   history,
   match
@@ -36,7 +37,7 @@ const EditExperience = ({
       current: loading || !experience.current ? false : experience.current,
       description: loading || !experience.description ? '' : experience.description,
     });
-  }, [loading, getCurrentProfile]);
+  }, [loading]);
 
   const { title, company, location, from, to, current, description } = formData;
 
@@ -145,4 +146,4 @@ const mapStateToProps = state => ({
   experience: state.profile.profile.experience
 });
 
-export default connect(mapStateToProps, { editExperience })(withRouter(EditExperience));
+export default connect(mapStateToProps, { getCurrentProfile, editExperience })(withRouter(EditExperience));
